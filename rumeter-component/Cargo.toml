@@ -7,7 +7,7 @@ authors = ["Liudao <jimmyseraph@testops.vip>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/jimmyseraph/rumeter"
-# homepage = "https://"
+homepage = "https://github.com/jimmyseraph/rumeter"
 description = """
 A load test platform for writing a load test script by rust.
 Just like JMeter, but it prefer using like SDK, not a GUI tool.

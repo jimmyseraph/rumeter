@@ -68,7 +68,7 @@ Now only http sampler has implemented. More commonly used samplers will implemen
 
 This project is licensed under the [MIT license].
 
-[MIT license]: https://github.com/jimmyseraph/rumeter/blob/main/LICENSE
+[MIT license]: https://github.com/jimmyseraph/rumeter/blob/main/LICENCE
 
 ### Contribution
 

@@ -1,0 +1,18 @@
+[package]
+name = "examples"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[dev-dependencies]
+rumeter-component = {path = "../rumeter-component"}
+
+reqwest = { version = "0.11", features = ["json", "blocking"] }
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1.34"
+tracing-subscriber = "0.3.11"
+async-trait = "0.1.53"
+
+[[example]]
+name = "http_get"
+path = "http_get.rs"

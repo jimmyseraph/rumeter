@@ -3,7 +3,7 @@ use record::RecordData;
 
 pub mod group;
 pub mod record;
-pub mod sampler;
+pub mod samplers;
 pub mod output;
 
 #[async_trait]

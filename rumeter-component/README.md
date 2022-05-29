@@ -38,7 +38,7 @@ impl Controller for SimpleController {
 ```
 
 Then, on your main.rs:
-```Rust
+```rust,no_run
 #[tokio::main]
 async fn main() ->  Result<(), Box<dyn std::error::Error>> {
 
@@ -61,8 +61,16 @@ more examples can be found [here][examples].
 
 [examples]: https://github.com/jimmyseraph/rumeter/tree/main/examples
 
+## generate load test report
+The rtl(RuMeter Test Log) file is a csv type file. You can use [JMeter] to generate the html style report like this:
+```Shell
+$ jmeter -g [your.rtl] -o [report_path]
+```
+
+[JMeter]: https://jmeter.apache.org
+
 ## Todo
-Now only http sampler has implemented. More commonly used samplers will implement in future version.
+Now only a few sampler has implemented. More commonly used samplers will implement in future version.
 
 ## License
 

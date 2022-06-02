@@ -725,7 +725,7 @@ dependencies = [
 
 [[package]]
 name = "rumeter"
-version = "0.1.0"
+version = "0.1.3"
 dependencies = [
  "async-trait",
  "rumeter-component",

@@ -112,10 +112,10 @@ impl ThreadGroup {
 
                             _ = test_record_tx.send(re_vec).await;
                             
-                            {
-                                let mut tc = thread_count.lock().unwrap();
-                                *tc -= 1;
-                            }
+                        }
+                        {
+                            let mut tc = thread_count.lock().unwrap();
+                            *tc -= 1;
                         }
 
                     });

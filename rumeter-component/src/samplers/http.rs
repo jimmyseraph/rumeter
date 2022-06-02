@@ -1,4 +1,5 @@
-use std::collections::HashMap;
+use std::fmt;
+use std::{collections::HashMap, error::Error};
 
 use tracing::*;
 use async_trait::async_trait;
@@ -7,6 +8,7 @@ use crate::{Sampler, record::{RecordData, ResponseResult}};
 
 pub type HeaderMap = reqwest::header::HeaderMap;
 pub type HeaderValue = reqwest::header::HeaderValue;
+pub type HeaderName = reqwest::header::HeaderName;
 
 #[derive(Clone)]
 pub struct HttpSampler {
@@ -17,6 +19,27 @@ pub struct HttpSampler {
     body: Option<String>,
 }
 
+#[derive(Debug)]
+pub struct RumeterErr {
+    message: String,
+}
+
+impl RumeterErr {
+    pub fn new(message: &str) -> Self {
+        Self { message: message.to_string() }
+    }
+}
+
+impl fmt::Display for RumeterErr {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "An Error Occurred, {}", self.message) // user-facing output
+    }
+}
+
+impl Error for RumeterErr {
+    
+}
+
 #[derive(Clone)]
 pub enum Method {
     GET,
@@ -25,6 +48,18 @@ pub enum Method {
 }
 
 impl Method {
+    pub fn from(m: &str) -> Result<Self, Box<dyn Error>> {
+        if m.eq_ignore_ascii_case("get") {
+            Ok(Method::GET)
+        } else if m.eq_ignore_ascii_case("post") {
+            Ok(Method::POST)
+        } else if m.eq_ignore_ascii_case("PUT") {
+            Ok(Method::PUT)
+        } else {
+            Err(Box::new(RumeterErr::new("method not supported")))
+        }
+    }
+
     pub fn len(&self) -> u32{
         match self {
             Method::GET => 3,

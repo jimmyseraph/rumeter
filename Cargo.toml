@@ -3,5 +3,6 @@
 members = [
     "common",
     "rumeter-component",
-    "examples"
+    "examples",
+    "rumeter",
 ]

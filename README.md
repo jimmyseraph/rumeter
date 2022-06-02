@@ -11,7 +11,7 @@ A basic HTTP API load test with RuMeter.
 Make sure you add the dependence on your Cargo.toml:
 ```toml
 [dependencies]
-rumeter-component = "0.1.0"
+rumeter-component = "0.1.3"
 ```
 
 Then, you should define your own controller first. Your controller must implement trait Controller:

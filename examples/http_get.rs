@@ -13,26 +13,32 @@ use tracing::*;
 
 #[tokio::main]
 async fn main() ->  Result<(), Box<dyn std::error::Error>> {
-
+    // subscript tracing log
     tracing_subscriber::fmt()
         .with_max_level(tracing::Level::INFO)
         .with_span_events(FmtSpan::CLOSE)
         .init();
 
-    let group = ThreadGroup::new(10, Duration::from_secs(1), -1, Some(Duration::from_secs(300)));
-    // let group = ThreadGroup::new(10, Duration::from_secs(1), 10, None);
+    // define a ThreadGroup to run your controller in multiple thread
+    // let group = ThreadGroup::new(10, Duration::from_secs(1), -1, Some(Duration::from_secs(300)));
+    let group = ThreadGroup::new(10, Duration::from_secs(1), 10, None);
 
+    // define the output file. this rtl file will record the load test data
     let out = FileOutput::new(File::create("http.rtl").unwrap());
+    // start the load test
     group.start(SimpleController::default(), Arc::new(Mutex::new(out))).await;
     info!("test finished");
     Ok(())
 }
 
+// define your own Controller, must be implemented trait Default and Clone
 #[derive(Default, Clone)]
 pub struct SimpleController;
 
+// your controller must implement trait Controller
 #[async_trait]
 impl Controller for SimpleController {
+    // you can define all your load testing logic in this function named "run"
     async fn run(&self) -> Vec<RecordData> {
         let mut headers = HeaderMap::new();
         headers.append("Access-Token", HeaderValue::from_static("123456"));
